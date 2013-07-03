@@ -28,14 +28,16 @@
         <p>Contact me at <a href="http://twitter.com/zachsais" target="_blank"><span class="at">@</span>zachsais</a> or <a href="mailto:zach.sais@utexas.edu">zach.sais<span class="at">@</span>utexas.edu</a>.</p>
 				
 				<!-- Lets draw some binary trees -->
-			<canvas id="canvas" width="300" height="300" style="display: block;"></canvas>
+			<canvas id="canvas" width="300" height="300" style="display: block; position: absolute; background: #f8f8f4; color: #330;"></canvas>
 			<script>
 			window.onload = function(){
 				var canvas = document.getElementById("canvas");
 				var ctx = canvas.getContext("2d");
 				//Lets resize the canvas to occupy the full page
-				canvas.width = 300;
-				canvas.height = 300;
+				var W = 300;
+				var H = 400;
+				canvas.width = W;
+				canvas.height = H;
 	
 				//Some variables
 				var length, divergence, reduction, line_width, start_points = [];
@@ -45,7 +47,7 @@
 				function init()
 				{
 					//filling the canvas white
-					ctx.fillStyle = "white";
+					ctx.fillStyle = "#f8f8f4";
 					ctx.fillRect(0, 0, W, H);
 		
 					//Lets draw the trunk of the tree
@@ -61,7 +63,7 @@
 					line_width = 10;
 		
 					//This is the end point of the trunk, from where branches will diverge
-					var trunk = {x: W/2, y: length+50, angle: 90};
+					var trunk = {x: W/2, y: length, angle: 90};
 					//It becomes the start point for branches
 					start_points = []; //empty the start points on every init();
 					start_points.push(trunk);
@@ -116,8 +118,8 @@
 					start_points = new_start_points;
 					//recursive call - only if length is more than 2.
 					//Else it will fall in an long loop
-					//if(length > 2) setTimeout(branches, 50);
-					//else setTimeout(init, 500);
+					if(length > 2) setTimeout(branches, 50);
+					else setTimeout(init, 500);
 				}
 	
 				function get_endpoint(x, y, a, length)
